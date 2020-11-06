@@ -9,24 +9,24 @@
 </template>
 
 <script>
-import {Swiper, SwiperItem} from '@/components/common/swiper'
+  import {Swiper, SwiperItem} from '@/components/common/swiper'
 
 
-export default {
-  name: "HomeSwiper",
-  components: {
-    Swiper, SwiperItem
-  },
-  props: {
-    banners: {
-      type: Array,
-      /*默认值要用函数返回，否则会数据共享*/
-      default() {
-        return []
+  export default {
+    name: "HomeSwiper",
+    components: {
+      Swiper, SwiperItem
+    },
+    props: {
+      banners: {
+        type: Array,
+        /*默认值要用函数返回，否则会数据共享*/
+        default() {
+          return []
+        }
       }
-    }
-  },
-}
+    },
+  }
 </script>
 
 <style scoped>
