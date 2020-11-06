@@ -9,17 +9,17 @@
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar";
-import HomeSwiper from "./childrenComps/HomeSwiper";
-import RecommendView from "./childrenComps/RecommendView";
-
-import {getHomeMultidata} from "network/home";
+import NavBar from "@/components/common/navbar/NavBar";
+import HomeSwiper from "@/views/home/childrenComps/HomeSwiper";
+import RecommendView from "@/views/home/childrenComps/RecommendView";
+import FeatureView from "@/views/home/childrenComps/FeatureView";
+import {getHomeMultidata} from "@/network/home";
 
 
 export default {
   name: "home",
   components: {
-    NavBar,HomeSwiper,RecommendView
+    NavBar, HomeSwiper, RecommendView, FeatureView
   },
   data() {
     return {

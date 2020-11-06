@@ -39,8 +39,8 @@ export default {
 }
 
 .recommend-item, img {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
 }
 
 </style>
