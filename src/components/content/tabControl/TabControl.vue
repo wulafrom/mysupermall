@@ -3,8 +3,7 @@
 
     <div v-for="(title,index) in titles" class="tar-control-item"
          :class="{active: index===currentIndex}"
-         @click="titleClick(index)"
-    >
+         @click="titleClick(index)">
       <span>{{ title }}</span>
     </div>
   </div>
@@ -29,6 +28,7 @@
     methods: {
       titleClick(index) {
         this.currentIndex = index
+        this.$emit('tabClick',index)
       }
     }
   }
@@ -41,6 +41,7 @@
     line-height: 40px;
     font-size: 15px;
     justify-content: space-around;
+    background-color: white;
   }
 
   .tar-control-item {
