@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import goodsListItem from "@/components/content/goods/goodsListItem";
+  import goodsListItem from "@/components/content/goods/GoodsListItem";
   export default {
     name: "goodsList",
     props: {

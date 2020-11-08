@@ -2,7 +2,7 @@
   <swiper>
     <swiper-item v-for="item in banners">
       <a :href="item.link">
-        <img :src="item.image" alt="">
+        <img :src="item.image" alt="" @load="initImageComplete" />
       </a>
     </swiper-item>
   </swiper>
@@ -17,6 +17,11 @@
     components: {
       Swiper, SwiperItem
     },
+    data(){
+      return {
+        isInitComplete:false
+      }
+    },
     props: {
       banners: {
         type: Array,
@@ -26,6 +31,14 @@
         }
       }
     },
+    methods:{
+      initImageComplete(){
+        if (!this.isInitComplete) {
+          this.isInitComplete = true
+          this.$emit("initImageComplete")
+        }
+      }
+    }
   }
 </script>
 

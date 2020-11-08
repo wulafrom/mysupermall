@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 
 
 //创建路由对象  懒加载
-const Home = () => import('@/views/home/home')
+const Home = () => import('@/views/home/Home')
 const Category = () => import('@/views/category/category.vue')
 const Cart = () => import('@/views/cart/cart.vue')
 const Profile = () => import('@/views/profile/profile.vue')
