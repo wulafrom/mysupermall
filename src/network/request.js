@@ -1,10 +1,10 @@
 import axios from 'axios'
-
+import {baseUrl} from './baseUrl'
 
 export function request(config) {
   //1.创建 AxiosStatic 对象
   const instance = axios.create({
-    baseURL: 'http://152.136.185.210:8000/api/w6',
+    baseURL: baseUrl(),
     timeout: 3500
   })
 
