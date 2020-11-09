@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
+    <img :src="goodsItem.show.img" alt="" @load="imageLoad" @click="jumpToDetailsPage">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
@@ -23,7 +23,17 @@
     methods:{
       imageLoad(){
         this.$bus.$emit('itemImageLoad')
+      },
 
+      jumpToDetailsPage(){
+        // $route为当前router跳转对象里面可以获取name、path、query、params等
+        // $router为VueRouter实例，想要导航到不同URL，则使用$router.push方法
+
+        //query 方式传递参数
+        //this.$router.push({path:'/detail'})
+
+        //params方式床底参数
+        this.$router.push('/detail/'+this.goodsItem.iid)
       }
     }
   }

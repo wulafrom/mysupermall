@@ -187,7 +187,6 @@
       //轮播图的加载监听
       initImageComplete() {
         this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
-        console.log(this.tabOffsetTop);
       },
 
     }
