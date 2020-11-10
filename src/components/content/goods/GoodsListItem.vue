@@ -1,10 +1,10 @@
 <template>
   <div class="goods-item">
-    <img :src="goodsItem.show.img" alt="" @load="imageLoad" @click="jumpToDetailsPage">
+    <img :src=" showImg" alt="" @load="imageLoad" @click="jumpToDetailsPage">
     <div class="goods-info">
-      <p>{{goodsItem.title}}</p>
-      <span class="price">{{goodsItem.price}}</span>
-      <span class="collect">{{goodsItem.cfav}}</span>
+      <p>{{ goodsItem.title }}</p>
+      <span class="price">{{ goodsItem.price }}</span>
+      <span class="collect">{{ goodsItem.cfav }}</span>
     </div>
   </div>
 </template>
@@ -13,27 +13,30 @@
   export default {
     name: "goodsListItem",
     props: {
-      goodsItem:{
-        type:Object,
-        default(){
+      goodsItem: {
+        type: Object,
+        default() {
           return {}
         }
       }
     },
-    methods:{
-      imageLoad(){
+    computed: {
+      showImg() {
+        return this.goodsItem.image || this.goodsItem.show.img
+      }
+    },
+    methods: {
+      imageLoad() {
         this.$bus.$emit('itemImageLoad')
       },
 
-      jumpToDetailsPage(){
+      jumpToDetailsPage() {
         // $route为当前router跳转对象里面可以获取name、path、query、params等
         // $router为VueRouter实例，想要导航到不同URL，则使用$router.push方法
-
-        //query 方式传递参数
-        //this.$router.push({path:'/detail'})
-
-        //params方式床底参数
-        this.$router.push('/detail/'+this.goodsItem.iid)
+        //params方式传递参数
+        let id = this.goodsItem.iid|| this.goodsItem.item_id
+        //console.log('id'+id)
+        this.$router.push('/detail/' + id)
       }
     }
   }

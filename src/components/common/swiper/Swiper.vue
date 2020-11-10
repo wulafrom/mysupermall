@@ -120,9 +120,13 @@
        */
       handleDom: function () {
         // 1.获取要操作的元素
-        //let swiperEl = document.querySelector('.swiper');
-        let swiperEl = this.$refs.swiper
-        let slidesEls = swiperEl.getElementsByClassName('slide');
+        // let swiperEl = document.querySelector('.swiper');
+
+        //重名情况下，无法选择到
+        // let swiperEl = this.$refs.swiper
+        // let slidesEls = swiperEl.getElementsByClassName('slide');
+        let swiperEl = document.querySelector(".swiper");
+        let slidesEls = swiperEl.querySelectorAll(".slide");
 
 
         // 2.保存个数

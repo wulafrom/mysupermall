@@ -26,9 +26,12 @@
       }
     },
     methods: {
+      //切换标题
       switchTitle(index) {
         this.currentIndex = index
+        this.$emit('switchTitle',index)
       },
+      //返回首页
       backToPrevious(){
         this.$router.back();
       }

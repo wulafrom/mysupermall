@@ -45,18 +45,19 @@
     methods: {
       imageLoad() {
 
-        if(this.currentLoadTimes ===0){
+        if (this.currentLoadTimes === 0) {
           this.$emit("loadImgEvent");
         }
 
         //存在的问题，第一次进来的时候，页面会出现断顿
         if (++this.currentLoadTimes === this.imagesLength)
           this.$emit("loadImgEvent");
+
       }
     },
-    watch:{
+    watch: {
       //相当于初始化时加载
-      detailInfo(){
+      detailInfo() {
         this.imagesLength = this.detailInfo.detailImage[0].list.length
       }
     }

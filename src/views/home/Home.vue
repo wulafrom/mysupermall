@@ -53,6 +53,7 @@
 
   //导入工具
   import {debounce} from "@/common/utils";
+  import {itemListenerMixin} from "@/common/mixin";
 
 
   export default {
@@ -60,6 +61,7 @@
     components: {
       HomeSwiper, RecommendView, FeatureView, NavBar, TabControl, GoodsList, Scroll, BackTop
     },
+    mixins:[itemListenerMixin],
     data() {
       return {
         banners: null,
@@ -106,13 +108,13 @@
 
     },
     mounted() {
-
+      //使用混入解决高度问题
       // this.$refs.scroll.refresh() 是将返回值传进去 不能写括号
-      const refresh = debounce(this.$refs.scroll.refresh, 100)
+      // const refresh = debounce(this.$refs.scroll.refresh, 100)
       //1.监听图片的加载
-      this.$bus.$on('itemImageLoad', () => {
-        refresh()
-      })
+      // this.$bus.$on('itemImageLoad', () => {
+      //   refresh()
+      // })
 
     },
     //进入这个组件，就是活跃的时候
@@ -123,6 +125,9 @@
     //离开这个组件，就是停用的时候
     deactivated() {
       this.saveY = this.$refs.scroll.getCurrentY()
+
+      //当离开当前组件的时候，取消对首页图片加载的监听
+      this.$bus.$off('itemImageLoad',this.itemListener)
     },
     methods: {
       /**
