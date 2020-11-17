@@ -18,8 +18,9 @@ export class Goods {
   constructor(itemInfo, columns, services) {
     this.title = itemInfo.title
     this.desc = itemInfo.desc
-    this.oldPrice = itemInfo.oldPrice
+    this.oldPrice = itemInfo.oldPrice || itemInfo.lowPrice
     this.lowNowPrice = itemInfo.lowNowPrice
+    //price 是价格区间
     this.price = itemInfo.price
     this.discountBgColor = itemInfo.discountBgColor
     this.discountDesc = itemInfo.discountDesc

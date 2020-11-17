@@ -28,7 +28,7 @@
       <goods-list :goods="showGoods"/>
 
     </scroll>
-    <!--监听组件原生的方法-->
+    <!--回到顶部-->
     <back-top @click.native="backTopClick" v-show="isShowBackBtn"></back-top>
   </div>
 </template>
@@ -43,7 +43,6 @@
   import NavBar from "@/components/common/navbar/NavBar";
   import TabControl from "@/components/content/tabControl/TabControl";
   import GoodsList from "@/components/content/goods/GoodsList"
-  import BackTop from "@/components/content/backTop/BackTop";
 
   //第三方滚动组件
   import Scroll from "@/components/common/scroll/Scroll";
@@ -52,16 +51,17 @@
   import {getHomeMultidata, getHomeGoods} from "@/network/home";
 
   //导入工具
-  import {debounce} from "@/common/utils";
   import {itemListenerMixin} from "@/common/mixin";
+  import {backTopMixin} from "@/common/mixin";
+  import {BACK_POSITION} from "@/common/const";
 
 
   export default {
     name: "home",
     components: {
-      HomeSwiper, RecommendView, FeatureView, NavBar, TabControl, GoodsList, Scroll, BackTop
+      HomeSwiper, RecommendView, FeatureView, NavBar, TabControl, GoodsList, Scroll
     },
-    mixins:[itemListenerMixin],
+    mixins: [itemListenerMixin, backTopMixin],
     data() {
       return {
         banners: null,
@@ -76,8 +76,6 @@
         },
         //当前默认分类
         currentType: 'pop',
-        //回到顶部按钮
-        isShowBackBtn: false,
         //是否吸顶
         isTabFixed: false,
         //当前分类栏的位置
@@ -119,7 +117,7 @@
     },
     //进入这个组件，就是活跃的时候
     activated() {
-      this.$refs.scroll.scrollTo(0, this.saveY,0)
+      this.$refs.scroll.scrollTo(0, this.saveY, 0)
       this.$refs.scroll.refresh()
     },
     //离开这个组件，就是停用的时候
@@ -127,7 +125,7 @@
       this.saveY = this.$refs.scroll.getCurrentY()
 
       //当离开当前组件的时候，取消对首页图片加载的监听
-      this.$bus.$off('itemImageLoad',this.itemListener)
+      this.$bus.$off('itemImageLoad', this.itemListener)
     },
     methods: {
       /**
@@ -173,13 +171,9 @@
         this.$refs.tabControl1.currentIndex = index
         this.$refs.tabControl2.currentIndex = index
       },
-      //回到顶部
-      backTopClick() {
-        this.$refs.scroll.scrollTo(0, 0)
-      },
       //实时判断是否开启回到顶端 以及判断是否分类栏吸顶
       scrollPosition(position) {
-        this.isShowBackBtn = (-position.y) > 1000
+        this.listenShowBackBtn(position)
 
         this.isTabFixed = (-position.y) > this.tabOffsetTop
 
@@ -223,7 +217,7 @@
 
   .tab-control-1 {
     position: relative;
-    z-index: 9;
+    z-index: 10;
     margin-top: 44px;
   }
 

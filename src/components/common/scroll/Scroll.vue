@@ -1,5 +1,7 @@
 <template>
+  <!--wrapper的高度会自动占据父元素的最大尺寸-->
   <div class="wrapper" ref="wrapper">
+    <!--content的高度，会随着内容的增加而增加，但可视范围在wrapper中，内容在滚动区中出现-->
     <div class="content">
       <slot>
       </slot>
