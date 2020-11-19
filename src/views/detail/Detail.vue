@@ -22,7 +22,7 @@
     <!--顶部返回按钮-->
     <back-top @click.native="backTopClick" v-show="isShowBackBtn"></back-top>
     <!--添加到购物车-->
-    <detail-bottom-bar @addCart='addCart'/>
+    <detail-bottom-bar @addCart='addToCart'/>
   </div>
 </template>
 
@@ -38,11 +38,10 @@
   import DetailBottomBar from "@/views/detail/childComps/DetailBottomBar";
   //网络请求
   import {getDetail, getRecommend, Goods, Shop, GoodsParam} from "@/network/detail";
-
   //common公共
   import {itemListenerMixin} from "@/common/mixin";
   import {backTopMixin} from "@/common/mixin";
-
+  import {mapActions} from '@/store/actions'
   //第三方组件
   import Scroll from "@/components/common/scroll/Scroll";
   import GoodsList from "@/components/content/goods/GoodsList";
@@ -134,17 +133,16 @@
 
     },
     methods: {
+      ...mapActions(["addCart"]),
       //刷新详情页的高度
       loadImgEvent() {
         this.$refs.scroll.refresh()
         this.getTitleY()
       },
-
       //切换分类
       switchTitle(index) {
         this.$refs.scroll.scrollTo(0, -this.titleContentLocation[index], 0)
       },
-
       //监听实时位置，判断是否切换标题
       scrollPosition(position) {
         //判断是否展示回到顶部按钮
@@ -164,7 +162,7 @@
           }
         }
       },
-      addCart() {
+      addToCart() {
         const product = {}
         product.image = this.topImages[0]
         product.title = this.goodsInfo.desc
@@ -176,7 +174,12 @@
         product.checked = false
 
         //this.$store.commit('addCart',product)
-        this.$store.dispatch('addCart', product)
+        // this.$store.dispatch('addCart', product).then(res => {
+        //   console.log(res);
+        // })
+        this.addCart(product).then(res => {
+          console.log(res)
+        })
 
       }
 

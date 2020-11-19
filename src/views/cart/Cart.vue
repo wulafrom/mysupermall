@@ -10,7 +10,7 @@
       <cart-list/>
     </scroll>
     <!--底部汇总-->
-
+    <cart-bottom-bar/>
   </div>
 </template>
 
@@ -18,14 +18,18 @@
   import NavBar from "@/components/common/navbar/NavBar";
   import CartList from "@/views/cart/childComps/CartList";
   import Scroll from "@/components/common/scroll/Scroll";
+  import CartBottomBar from "@/views/cart/childComps/CartBottomBar";
   import {mapGetters} from 'vuex'
 
   export default {
     name: "cart",
-    components: {NavBar, CartList, Scroll},
+    components: {NavBar, CartList, Scroll,CartBottomBar},
     computed: {
       // ...mapGetters({cartLengths:'cartLength'})
-      ...mapGetters(["cartLength"])
+      ...mapGetters(["cartList"]),
+      cartLength() {
+        return this.cartList.filter(item => item.checked).length
+      }
     },
     //必须是 keep-alive的组件才能使用这个钩子函数
     activated() {
@@ -49,7 +53,7 @@
   }
 
   .content {
-    height: calc(100% - 44px - 49px);
+    height: calc(100% - 44px - 49px - 40px);
     /*超过这个部分的高度进行隐藏*/
     overflow: hidden;
   }
