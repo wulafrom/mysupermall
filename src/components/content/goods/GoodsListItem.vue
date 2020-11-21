@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item">
-    <img :src=" showImg" alt="" @load="imageLoad" @click="jumpToDetailsPage">
+    <img v-lazy="showImg" alt="" @load="imageLoad" @click="jumpToDetailsPage" :key='showImg' >
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
       <span class="price">{{ goodsItem.price }}</span>
@@ -34,7 +34,7 @@
         // $route为当前router跳转对象里面可以获取name、path、query、params等
         // $router为VueRouter实例，想要导航到不同URL，则使用$router.push方法
         //params方式传递参数
-        let id = this.goodsItem.iid|| this.goodsItem.item_id
+        let id = this.goodsItem.iid || this.goodsItem.item_id
         //console.log('id'+id)
         this.$router.push('/detail/' + id)
       }
@@ -88,6 +88,6 @@
     top: -1px;
     width: 14px;
     height: 14px;
-    background: url("~assets/img/common/collect.svg") 0 0/14px 14px;
+    background: url("~@/assets/img/common/collect.svg") 0 0/14px 14px;
   }
 </style>

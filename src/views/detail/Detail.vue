@@ -1,5 +1,6 @@
 <template>
   <div id="detail">
+
     <!--顶层的按钮-->
     <detail-nav-bar class="detail-nav" @switchTitle="switchTitle" ref="detailTitles"/>
     <!--滚动区-->
@@ -23,6 +24,7 @@
     <back-top @click.native="backTopClick" v-show="isShowBackBtn"></back-top>
     <!--添加到购物车-->
     <detail-bottom-bar @addCart='addToCart'/>
+    <!--弹出-->
   </div>
 </template>
 
@@ -36,12 +38,13 @@
   import DetailParams from "@/views/detail/childComps/DetailParams";
   import DetailComment from "@/views/detail/childComps/DetailComment";
   import DetailBottomBar from "@/views/detail/childComps/DetailBottomBar";
+  import Toast from "@/components/content/toast/Toast";
   //网络请求
   import {getDetail, getRecommend, Goods, Shop, GoodsParam} from "@/network/detail";
   //common公共
   import {itemListenerMixin} from "@/common/mixin";
   import {backTopMixin} from "@/common/mixin";
-  import {mapActions} from '@/store/actions'
+  import {mapActions} from 'vuex'
   //第三方组件
   import Scroll from "@/components/common/scroll/Scroll";
   import GoodsList from "@/components/content/goods/GoodsList";
@@ -58,6 +61,7 @@
       DetailParams,
       DetailComment,
       DetailBottomBar,
+      Toast,
       Scroll,
       GoodsList
     },
@@ -178,7 +182,14 @@
         //   console.log(res);
         // })
         this.addCart(product).then(res => {
-          console.log(res)
+          // this.isShow = true
+          // this.message = res
+          //
+          // setTimeout(() => {
+          //   this.isShow = false
+          // },1500)
+
+          this.$toast.showMessage(res)
         })
 
       }

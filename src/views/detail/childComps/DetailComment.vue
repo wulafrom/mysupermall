@@ -69,7 +69,7 @@
 
   .comment_more::after {
     content: "";
-    background: url("/src/assets/img/detail/right_arrow.svg") 0 0/1.06rem 1.06rem;
+    background: url("~@/assets/img/detail/right_arrow.svg") 0 0/1.06rem 1.06rem;
     display: inline-block;
     position: relative;
     top: 0.26rem;
