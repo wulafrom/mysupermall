@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  {{ message }}
+</div>
+<script src="./node_modules/vue/dist/vue.js"></script>
+
+<script>
+  class Dep {
+    constructor() {
+      this.subs = []
+    }
+
+    addSub(watcher) {
+      this.subs.push(watcher)
+    }
+
+    notify(newValue) {
+      this.subs.forEach(watcher => {
+        watcher.update(newValue)
+      })
+    }
+  }
+
+  class Watcher {
+    constructor(value) {
+      this.value = value
+    }
+
+    update(newValue) {
+      this.value = newValue
+      console.log('发生改变后的新值' + this.value);
+    }
+  }
+
+  const obj = {
+    age: 66,
+    name: '张一'
+  }
+
+  console.log(Object.keys(obj));
+
+  Object.keys(obj).forEach(key => {
+    let value = obj[key]
+    Object.defineProperty(obj, key, {
+      get() {
+        this.dep = new Dep()
+        const w1 = new Watcher(value)
+        this.dep.addSub(w1)
+        console.log('获取值: ' + value);
+        return value
+      },
+      set(newValue) {
+        console.log('当前值:' + value)
+        console.log('设定新值: ' + newValue)
+        value = newValue
+        this.dep.notify(newValue)
+      }
+    })
+  })
+
+  console.log('打印当前name' + obj.name);
+  obj.name = 'kobe'
+  obj.age = 18
+
+
+  let dep = new Dep()
+
+  const w1 = new Watcher('张三')
+  const w2 = new Watcher('张四')
+  const w3 = new Watcher('张五')
+
+  dep.addSub(w1)
+  dep.addSub(w2)
+  dep.addSub(w3)
+
+
+  dep.notify('老王')
+
+
+</script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: '666'
+    }
+  })
+</script>
+</body>
+</html>

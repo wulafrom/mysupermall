@@ -11,7 +11,7 @@ module.exports = {
       //selectorBlackList: ['ignore','tab-bar','tab-bar-item'],//指定不需要转换的类
       minPixelValue: 1, //小于或等于'1px'不转换为视窗单位
       mediaQuery: false, //允许在媒体查询中转换'px'
-      //exclude: [/TabBar/] //[]内为JS正则表达式
+      exclude: [/TabBar/] // []内为JS正则表达式     / /  内容写在两个斜杠里
 
       // viewportWidth: 768, //视窗的宽度，对应的是我们设计稿的宽度
       // viewportHeight: 1024, //视窗的高度, 对应的是设计稿的高度

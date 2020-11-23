@@ -26,7 +26,6 @@
 
       <!--商品列表-->
       <goods-list :goods="showGoods"/>
-
     </scroll>
     <!--回到顶部-->
     <back-top @click.native="backTopClick" v-show="isShowBackBtn"></back-top>

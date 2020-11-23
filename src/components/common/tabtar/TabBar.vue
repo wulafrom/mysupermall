@@ -1,5 +1,5 @@
 <template>
-  <div id="tabtar">
+  <div class="tabtar" >
     <slot></slot>
   </div>
 </template>
@@ -14,7 +14,7 @@
 
 <style scoped>
 
-  #tabtar {
+  .tabtar {
     display: flex;
     background-color: #f6f6f6;
     position: fixed;
